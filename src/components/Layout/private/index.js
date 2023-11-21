@@ -4,6 +4,7 @@ import { useContext } from "react";
 import Navbar from "../navbar";
 import Sidebar from "../sidebar";
 import { AuthContext } from "@/providers/auth";
+import Footer from "../footer";
 
 const PrivateLayout = ({ children }) => {
 const { isLogged } = useContext(AuthContext);
@@ -12,6 +13,7 @@ const { isLogged } = useContext(AuthContext);
     <>
           <Navbar />
           <Sidebar>{children}</Sidebar>
+          <Footer />
     </>
   );
 };
