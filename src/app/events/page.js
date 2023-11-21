@@ -1,8 +1,5 @@
-
 const Events = () => {
-    return (
-      <div>Events screen</div>
-    )
-  }
-  
-  export default Events
+  return <div className="hero min-h-screen bg-white" />;
+};
+
+export default Events;

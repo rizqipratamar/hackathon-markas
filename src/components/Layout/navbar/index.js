@@ -4,21 +4,22 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 px-[91px]">
       <div className="flex-1">
-      <label
+        <label
           htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden"
         >
           Open drawer
         </label>
-        <a className="btn btn-ghost text-xl">Markas</a>
-     
+        <Link href="/" className="btn btn-ghost text-xl">
+          Markas
+        </Link>
       </div>
       <div className="flex-none gap-[82px]">
-        <Link href='/'>Home</Link>
-        <Link href='/about'>About</Link>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
         <div>Philosophy</div>
-        <Link href='/events'>Events</Link>
-        <Link href='/booking'>Booking</Link>
+        <Link href="/events">Events</Link>
+        <Link href="/booking">Booking</Link>
         <div>Contact US</div>
       </div>
     </div>

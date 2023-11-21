@@ -2,6 +2,7 @@
 
 import EventCard from "@/components/Card/Event";
 import FilosofiCard from "@/components/Card/Filosofi";
+import FAQSection from "@/components/Section/FAQ";
 import KarateristikSection from "@/components/Section/Karateristik";
 import ReviewSection from "@/components/Section/Review";
 import CircleArrowIcon from "@/images/svg/circleArrow";
@@ -89,6 +90,8 @@ export default function Home() {
       </div>
 
       <ReviewSection />
+
+      <FAQSection />
 
       <div className="hero min-h-[200px] bg-white"></div>
     </>
