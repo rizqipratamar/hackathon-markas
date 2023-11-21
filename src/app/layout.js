@@ -3,7 +3,10 @@ import "./globals.css";
 import PrivateLayout from "@/components/Layout/private";
 import { Providers } from "./providers";
 
-const lexendDeca = Lexend_Deca({ subsets: ["latin"] });
+const lexendDeca = Lexend_Deca({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "600", "700", "800"],
+});
 
 export const metadata = {
   title: "Create Next App",

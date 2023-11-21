@@ -14,7 +14,6 @@ const Booking = () => {
     }
     fetchRoom()
   }, [])
-console.log(roomList)
  
     return (
       <div className="hero min-h-screen bg-base-200">

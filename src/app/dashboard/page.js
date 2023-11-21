@@ -4,8 +4,6 @@ import useDashboard from "./dashboard.hooks";
 
 const Dashboard = () => {
   const { userData } = useDashboard()
-
-  console.log(userData,'test')
   return (
     <div className="overflow-x-auto">
       <table className="table">
