@@ -1,4 +1,4 @@
-const CircleArrowIcon = ({ side = "right" }) => {
+const CircleArrowIcon = ({ side = "right", color= "black" }) => {
   return (
     <>
       {side === "left" && (
@@ -13,13 +13,13 @@ const CircleArrowIcon = ({ side = "right" }) => {
             cx="33.5"
             cy="33.5"
             r="31.5"
-            stroke="black"
-            stroke-width="3"
+            stroke={color}
+            strokeWidth="3"
           />
           <path
             d="M38.5 45.5L25.5 33.3378L38.5 20.5"
-            stroke="black"
-            stroke-width="3"
+            stroke={color}
+            strokeWidth="3"
           />
         </svg>
       )}
@@ -35,13 +35,13 @@ const CircleArrowIcon = ({ side = "right" }) => {
             cx="33.5"
             cy="33.5"
             r="31.5"
-            stroke="black"
-            stroke-width="3"
+            stroke={color}
+            strokeWidth="3"
           />
           <path
             d="M27.5 20.5L40.5 32.6622L27.5 45.5"
-            stroke="black"
-            stroke-width="3"
+            stroke={color}
+            strokeWidth="3"
           />
         </svg>
       )}

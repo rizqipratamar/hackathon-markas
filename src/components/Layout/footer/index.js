@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div className="bg-primary h-[502px] w-full px-[81px] pb-20 z-50">
-      <div className="relative z-50 bg-white w-full p-[50px] rounded-lg border-black border-2 h-[440px] mt-[-80px]">
+      <div className="relative z-50 bg-white w-full p-[50px] rounded-lg border-black border-2 h-[440px] mt-[-180px]">
         <div className="grid grid-cols-5 gap-[104px]">
           <div className="col-span-2">
             <div className="mb-[18px]">MARKAS</div>
