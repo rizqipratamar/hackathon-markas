@@ -1,5 +1,5 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "firebase.js";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "./firebase.js";
 
 export const ROOM = {
   ADD: async (roomData) => {
@@ -21,17 +21,13 @@ export const ROOM = {
   },
   FETCH: async () => {
     try {
-      await getDocs(collection(db, "rooms")).then((querySnapshot) => {
-        const rooms = querySnapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        return {
-          status: 200,
-          message: "Rooms fetched successfully",
-          body: rooms,
-        };
-      });
+      const response = await getDocs(collection(db, "rooms"))
+      const rooms = response.docs.map((doc) => doc.data()?.room)
+      return {
+        status: 200,
+        message: "Room fetched successfully",
+        body: rooms,
+      };
     } catch (e) {
       return {
         status: 500,
