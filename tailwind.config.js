@@ -14,5 +14,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      {
+        bumblebee: {
+          ...require("daisyui/src/theming/themes")["bumblebee"],
+          primary: "#D90027",
+          "primary-content": "#fff",
+        },
+      },
+    ],
+  },
+  plugins: [require("daisyui")],
 }
