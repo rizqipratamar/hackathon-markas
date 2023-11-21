@@ -6,6 +6,11 @@ import FAQSection from "@/components/Section/FAQ";
 import KarateristikSection from "@/components/Section/Karateristik";
 import ReviewSection from "@/components/Section/Review";
 import CircleArrowIcon from "@/images/svg/circleArrow";
+import PartnerSection from "@/components/Section/Partner";
+
+import Image from "next/image";
+import ILLUSTRATION_IMAGE from "@/images/png/illustration-1.png";
+import LOGO from "@/images/png/logo.png";
 
 export default function Home() {
   return (
@@ -93,7 +98,32 @@ export default function Home() {
 
       <FAQSection />
 
-      <div className="hero min-h-[200px] bg-white"></div>
+      <div className="w-screen min-h-screen text-center">
+        <div>KAMI MENUNGGUMU DI MARKAS!</div>
+        <Image src={ILLUSTRATION_IMAGE} alt=""></Image>
+        <button className="btn btn-lg btn-primary mx-auto text-[28px] rounded-full ">
+          Kunjungi Instagram Kami
+        </button>
+      </div>
+
+      <PartnerSection />
+
+      <div className="text-center">
+        <div className="text-[20px] mt-[35px]">
+          Ingin bekerja di tempat yang nyaman, fleksibel, dan penuh inspirasi?
+        </div>
+        <div className="text-[20px] mt-[35px]">
+          Segera bergabung bersama kami di{" "}
+          <span className="text-primary">#MARKAS</span>
+        </div>
+        <div className="flex w-full justify-center">
+          {" "}
+          <Image src={LOGO} width={230} alt=""></Image>
+        </div>
+        <div className="text-primary"> MARKAS</div>
+      </div>
+
+      <div className="hero min-h-[300px] bg-white"></div>
     </>
   );
 }
