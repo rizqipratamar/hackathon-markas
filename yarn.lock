@@ -921,6 +921,11 @@ busboy@1.6.0:
   dependencies:
     streamsearch "^1.1.0"
 
+calendar-js@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/calendar-js/-/calendar-js-1.4.4.tgz#ddc15fc6b3a186d59f30f90361ad723963656237"
+  integrity sha512-KesBEbMZnjGzO/xl0ZcJVnezSRw3Xn/KaSUneY4LnANKlZwlllOtd6UGSyW8DSM+diUNi5dVVmSx4eZIMAA2Aw==
+
 call-bind@^1.0.0, call-bind@^1.0.2, call-bind@^1.0.4, call-bind@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/call-bind/-/call-bind-1.0.5.tgz"
