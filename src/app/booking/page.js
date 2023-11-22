@@ -1,123 +1,91 @@
 "use client";
 
-import useBooking from "./booking.hooks";
+import BookingMain from "@/components/Booking";
+import CalendarBooking from "@/components/Booking/calendar";
+import FormBooking from "@/components/Booking/form";
+import BookingSuccess from "@/components/Booking/success";
+import AttentionSection from "@/components/Section/Attention";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const Booking = () => {
-  const { roomList, tabIndex, setTabIndex, listTab } = useBooking();
+  const query = useSearchParams();
 
+  const selectedRoom = query.get("name");
+  const selectedDate = query.get("date");
+  const isSuccess = query.get("success");
   return (
     <>
-      <div className="w-screen px-[110px]">
-        <div className="text-center">
-          <div>Booking</div>
-          <div>Cari Markas Disekitarmu</div>
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input input-bordered input-primary rounded-full"
-          />
-        </div>
-
-        <div role="tablist" className="tabs tabs-boxed mt-20">
-          {listTab.map((data, index) => (
-            <a
-              role="tab"
-              className={`tab ${index === tabIndex && "tab-active"}`}
-              key={index}
-              onClick={() => setTabIndex(index)}
-            >
-              {data}
-            </a>
-          ))}
-        </div>
-
-        <div className="text-left mt-20">
-          <div>Markas</div>
-          <div>Sidosermo, Surabaya</div>
-          <div>
-            Jl. Sidosermo II No.106F, Sidosermo, Kec. Wonocolo, Kota Surabaya,
-            Jawa Timur.
-          </div>
-        </div>
-
-        <div className="text-left mt-20">
-          <div>Fasilitas Gedung</div>
-          <div className="grid grid-cols-3 gap-[220px]">
-            <div className="grid grid-cols-1 gap-5">
-              <div>✅ Tempat Parkir</div>
-              <div>✅ Perpustakaan</div>
-              <div>✅ Air Conditioner</div>
-              <div>✅ Dispenser Air</div>
+      {!selectedRoom && <BookingMain />}
+      {selectedRoom && (
+        <div>
+          <Link href="/booking">
+            <div className="flex px-[55px] mx-[110px] py-[26px] gap-2 border-2 border-black rounded-xl bg-white max-w-[380px] my-auto">
+              <svg
+                width="13"
+                height="21"
+                viewBox="0 0 13 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="my-auto"
+              >
+                <path
+                  d="M11.5 19.5L2 10.5L11.5 1"
+                  stroke="black"
+                  strokeWidth="2"
+                />
+              </svg>
+              <div className="my-auto">Kembali ke Pemilihan Ruangan</div>
             </div>
-            <div className="grid grid-cols-1 gap-5">
-              <div>✅ Rak Sepatu</div>
-              <div>✅ Lounge</div>
-              <div>✅ Toilet</div>
-              <div>✅ Internet</div>
-            </div>
-            <div>
-              <div>✅ Mini Kafe</div>
-              <div className="mt-5">✅ Petugas Teknisi</div>
-            </div>
-          </div>
-        </div>
+          </Link>
 
-        <div className="mt-20 ">
-          <div>Detail Lokasi</div>
-          <div className="text-left p-[39px] border-2 border-black rounded-lg">
-            <div className="grid grid-cols-2 gap-[150px]">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15829.404312021992!2d112.7495082!3d-7.3144002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbda250e651f%3A0xe8fb3089fee046e6!2sMARKAS!5e0!3m2!1sid!2sid!4v1700629618914!5m2!1sid!2sid"
-                width="600"
-                height="580"
-                allowfullscreen=""
-                className="rounded-lg border-2 border-black"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              />
-
-              <div>
-                <div>Detail Alamat</div>
-                <div>
-                  Jl. Sidosermo II No.106F, Sidosermo, Kec. Wonocolo, Kota
-                  Surabaya, Jawa Timur.
-                </div>
-                <div className="divider" />
-                <div>Tempat Terdekat</div>
-                <div className="flex justify-between mt-[21px]">
-                  <div>
-                    <div>Plaza Marina</div>
-                    <div>Pusat perbelanjaan dan hiburan</div>
+          <div className="w-full text-center justify-center flex mt-[66px]">
+            <div className="text-sm breadcrumbs">
+              <ul>
+                <li>
+                  <div
+                    className={`text-[22px] my-auto ${
+                      !isSuccess && !selectedDate
+                        ? "text-black"
+                        : "text-[#BCBCBC]"
+                    }`}
+                  >
+                    <span className="text-primary ">1 /</span> Pilih tanggal
                   </div>
-                  <div> 5 Menit</div>
-                </div>
-                <div className="flex justify-between mt-[21px]">
-                  <div>
-                    <div>Plaza Marina</div>
-                    <div>Pusat perbelanjaan dan hiburan</div>
+                </li>
+                <li>
+                  <div
+                    className={`text-[22px] my-auto ${
+                      !isSuccess && selectedDate
+                        ? "text-black"
+                        : "text-[#BCBCBC]"
+                    }`}
+                  >
+                    <span className="text-primary">2 / </span>
+                    Pesan
                   </div>
-                  <div> 5 Menit</div>
-                </div>
-                <div className="flex justify-between mt-[21px]">
-                  <div>
-                    <div>Plaza Marina</div>
-                    <div>Pusat perbelanjaan dan hiburan</div>
+                </li>
+                <li>
+                  <div
+                    className={`text-[22px] my-auto ${
+                      isSuccess ? "text-black" : "text-[#BCBCBC]"
+                    }`}
+                  >
+                    <span className="text-primary">3 / </span>
+                    Selesai
                   </div>
-                  <div> 5 Menit</div>
-                </div>
-                <div className="flex justify-between mt-[21px]">
-                  <div>
-                    <div>Plaza Marina</div>
-                    <div>Pusat perbelanjaan dan hiburan</div>
-                  </div>
-                  <div> 5 Menit</div>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
+          {!selectedDate && <CalendarBooking />}
+          {!isSuccess && selectedDate && <FormBooking />}
+          {isSuccess && <BookingSuccess />}
         </div>
-      </div>
-      <div className="hero min-h-screen bg-base-100" />
+      )}
+
+      <AttentionSection />
+      <div className="hero min-h-[300px] bg-primary" />
     </>
   );
 };

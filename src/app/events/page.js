@@ -44,7 +44,7 @@ const Events = () => {
         </div>
       </div>
 
-      <div className="hero min-h-[300px] bg-base-100" />
+      <div className="hero min-h-[300px] bg-white" />
     </>
   );
 };

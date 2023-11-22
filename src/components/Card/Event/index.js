@@ -7,6 +7,8 @@ const EventCard = (
     desc: "Pelajari kunci sukses",
     city: "Surabaya",
     month: "September 202",
+    type: "meeting",
+    time: "",
   }
 ) => {
   return (
