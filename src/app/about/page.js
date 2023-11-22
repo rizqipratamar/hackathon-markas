@@ -1,5 +1,6 @@
 import FilosofiCard from "@/components/Card/Filosofi";
 import KarateristikSection from "@/components/Section/Karateristik";
+import PartnerSection from "@/components/Section/Partner";
 
 const About = () => {
   return (
@@ -29,7 +30,11 @@ const About = () => {
       <div className="hero min-h-screen bg-white my-20">
         <KarateristikSection />
       </div>
-      <div className="hero min-h-screen bg-white" />
+      <PartnerSection />
+      <div className="hero bg-white">
+        Gain Knowledge. Get Mentored. Expand Network.
+      </div>
+      <div className="hero min-h-[500px] bg-white" />
     </>
   );
 };
