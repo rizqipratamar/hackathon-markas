@@ -1,5 +1,6 @@
 "use client";
 
+import RoomTypeCard from "@/components/Card/RoomType";
 import useBooking from "./booking.hooks";
 
 const Booking = () => {
@@ -8,17 +9,19 @@ const Booking = () => {
   return (
     <>
       <div className="w-screen px-[110px]">
-        <div className="text-center">
-          <div>Booking</div>
-          <div>Cari Markas Disekitarmu</div>
+        <div className="text-center mt-[70px]">
+          <div className="text-primary text-[28px]">Booking</div>
+          <div className="font-bold text-5xl mt-2">
+            CARI MARKAS DI SEKITARMU!
+          </div>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered input-primary rounded-full"
+            placeholder="Cari “Kota Surabaya” atau “Sidosermo”"
+            className="input input-bordered rounded-full shadow-md my-[60px] w-full"
           />
         </div>
 
-        <div role="tablist" className="tabs tabs-boxed mt-20">
+        <div role="tablist" className="tabs tabs-boxed">
           {listTab.map((data, index) => (
             <a
               role="tab"
@@ -116,8 +119,15 @@ const Booking = () => {
             </div>
           </div>
         </div>
+        <div className="mt-20 font-bold text-5xl mb-[90px]">Tipe Ruangan</div>
+        <RoomTypeCard />
       </div>
-      <div className="hero min-h-screen bg-base-100" />
+      <div className="w-screen px-[110px] pt-[110px] min-h-screen bg-primary text-left mt-[226px] text-white">
+        <div className="text-white text-[36px]">
+          Hal yang perlu diperhatikan
+        </div>
+        <div></div>
+      </div>
     </>
   );
 };
