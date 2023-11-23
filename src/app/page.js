@@ -10,7 +10,9 @@ import PartnerSection from "@/components/Section/Partner";
 
 import Image from "next/image";
 import ILLUSTRATION_IMAGE from "@/images/png/illustration-1.png";
-import LOGO from "@/images/png/logo.png";
+import LOGO from "@/images/png/logo/markas-icon.png";
+import LOGO_TEXT from "@/images/png/logo/markas-text-red.png";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -57,37 +59,38 @@ export default function Home() {
         </div>
 
         <div className="mt-[108px] text-center">
-          <div className="text-primary text-[28px]">FILOSOFI</div>
-          <div className="text-[48px] mt-5 font-bold">
-            INKLUSIF dan KOLABORATIF
+          <div className="text-primary text-[28px] font-semibold">FILOSOFI</div>
+          <div className="text-5xl mt-5 font-extrabold">
+            INKLUSIF DAN KOLABORATIF
           </div>
-          <div className="text-[20px] mt-[35px] mb-20">
+          <div className="text-xl font-light mt-[35px] mb-20">
             Sejak diinisiasi di tahun 2016, semangat #1000StartupDigital adalah
             untuk berkolaborasi <br /> membuat ekosistem startup Indonesia
             menjadi inklusif dan kolaboratif.
           </div>
         </div>
-
-        <div className="mt-[60px] grid grid-cols-3 gap-12">
-          {[1, 2, 3].map((data, index) => (
-            <div key={index}>
-              <FilosofiCard data={data} />
-            </div>
-          ))}
+        <div className="mt-[80px] grid grid-cols-3 gap-[44px]">
+          <FilosofiCard />
         </div>
 
         <div className="mt-[100px] w-full flex">
-          <button className="btn btn-lg btn-primary mx-auto text-[28px] rounded-full ">
-            Cari tahu lebih
-          </button>
+          <Link href="/about" className="mx-auto">
+            <button className="btn btn-lg btn-primary text-[28px] rounded-full">
+              Cari tahu lebih
+            </button>
+          </Link>
         </div>
       </div>
 
-      <div className="w-screen bg-primary text-white  text-center py-[52px] text-[48px] font-bold">
-        <div>MARI BERKOLABORASI</div>
-        <button className="btn  btn-outline  bg-white btn-lg btn-primary mx-auto text-[28px] rounded-full ">
-          Booking
-        </button>
+      <div className="w-screen bg-primary text-white text-center py-[52px] mt-[124px]">
+        <div className="text-[48px] font-extrabold mb-12">
+          MARI BERKOLABORASI
+        </div>
+        <Link href="/booking" className="mx-auto">
+          <button className="btn btn-outline bg-white btn-lg btn-primary py-4 px-[104px] text-[28px] font-semibold rounded-full ">
+            Booking
+          </button>
+        </Link>
       </div>
 
       <div className="hero min-h-screen bg-white my-20">
@@ -98,29 +101,36 @@ export default function Home() {
 
       <FAQSection />
 
-      <div className="w-screen min-h-screen text-center">
-        <div>KAMI MENUNGGUMU DI MARKAS!</div>
-        <Image src={ILLUSTRATION_IMAGE} alt=""></Image>
-        <button className="btn btn-lg btn-primary mx-auto text-[28px] rounded-full ">
+      <div className="w-screen min-h-screen text-center mt-[180px]">
+        <div className="text-5xl font-extrabold">
+          KAMI MENUNGGUMU DI MARKAS!
+        </div>
+        <Image
+          src={ILLUSTRATION_IMAGE}
+          className="my-[85px]"
+          alt="ilustration image"
+        />
+        <button className="btn btn-lg btn-primary mx-auto px-12 text-[28px] font-semibold rounded-full">
           Kunjungi Instagram Kami
         </button>
       </div>
 
       <PartnerSection />
 
-      <div className="text-center">
-        <div className="text-[20px] mt-[35px]">
+      <div className="text-center mt-[202px]">
+        <div className="text-4xl">
           Ingin bekerja di tempat yang nyaman, fleksibel, dan penuh inspirasi?
         </div>
-        <div className="text-[20px] mt-[35px]">
+        <div className="text-4xl my-[60px]">
           Segera bergabung bersama kami di{" "}
-          <span className="text-primary">#MARKAS</span>
+          <span className="text-primary font-bold">#MARKAS</span>
         </div>
         <div className="flex w-full justify-center">
-          {" "}
-          <Image src={LOGO} width={230} alt=""></Image>
+          <Image src={LOGO} width={230} alt="icon" />
         </div>
-        <div className="text-primary"> MARKAS</div>
+        <div className="flex w-full justify-center">
+          <Image src={LOGO_TEXT} width={360} alt="icon text" />
+        </div>
       </div>
 
       <div className="hero min-h-[300px] bg-white"></div>
