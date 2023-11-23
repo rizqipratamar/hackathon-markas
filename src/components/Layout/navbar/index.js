@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
+import LOGO_TEXT from "@/images/png/logo/markas-text-red.png";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 px-[91px]">
+    <div className="navbar bg-base-100 px-[84px] py-6">
       <div className="flex-1">
         <label
           htmlFor="my-drawer-2"
@@ -10,11 +12,11 @@ const Navbar = () => {
         >
           Open drawer
         </label>
-        <Link href="/" className="btn btn-ghost text-xl">
-          Markas
+        <Link href="/" className="btn btn-ghost">
+          <Image src={LOGO_TEXT} width={182} height={66} alt="icon text" />
         </Link>
       </div>
-      <div className="flex-none gap-[82px]">
+      <div className="flex-none gap-[82px] text-primary text-[22px] font-light">
         <Link href="/">Home</Link>
         <Link href="/about">About</Link>
         <div>Philosophy</div>
