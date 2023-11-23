@@ -3,7 +3,11 @@ import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
 import calendar from "calendar-js";
 import { useSearchParams } from "next/navigation";
-import { gapi } from "gapi-script";
+import dynamic from "next/dynamic";
+
+const { gapi } = dynamic(() => import("gapi-script"), {
+  ssr: false,
+});
 import dayjs from "dayjs";
 
 const MAP_DATA = [
