@@ -1,7 +1,6 @@
+import { useState } from "react";
 import CircleArrowIcon from "@/images/svg/circleArrow";
 import Image from "next/image";
-import REVIEW_AVATAR_1 from "@/images/png/review-avatar-1.png";
-import REVIEW_AVATAR_2 from "@/images/png/review-avatar-2.png";
 
 const bgImage = {
   backgroundImage: "url('/bg-review.png')",
@@ -10,40 +9,63 @@ const bgImage = {
   backgroundColor: "white",
   backgroundSize: "cover",
 };
-const ReviewSection = () => {
+
+const ReviewSection = ({ review, reviewPerPage }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastItem = currentPage * reviewPerPage;
+  const indexOfFirstItem = indexOfLastItem - reviewPerPage;
+  const currentItems = review.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(review.length / reviewPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   return (
     <div className="w-screen h-[925px] p-[108px] text-white" style={bgImage}>
       <div className="flex justify-between">
         <div>
-          <div className="font-extrabold text-5xl">APA KATA MEREKA</div>
+          <div className="font-extrabold text-5xl mt-[181px]">
+            APA KATA MEREKA
+          </div>
           <div className="font-semibold text-[28px] mt-5 ">
             ⭐ 4.6 | 30 Ulasan di Google
           </div>
         </div>
-        <div className="flex my-auto gap-5">
-          <CircleArrowIcon side="left" color="white" />
-          <CircleArrowIcon side="right" color="white" />
+        <div className="flex my-auto gap-5 mt-[181px]">
+          <button
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            className="cursor-pointer"
+          >
+            <CircleArrowIcon
+              side="left"
+              color={currentPage === 1 ? "gray" : "white"}
+            />
+          </button>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="cursor-pointer"
+          >
+            <CircleArrowIcon
+              side="right"
+              color={currentPage === totalPages ? "gray" : "white"}
+            />
+          </button>
         </div>
       </div>
       <div className="grid grid-cols-2 mt-[78px] gap-[112px]">
-        {[
-          {
-            name: "Lexi Handi Nayana",
-            avatar: REVIEW_AVATAR_1,
-            job: "BuddyP2P - Hamburg, Jerman",
-            rating: "⭐ ⭐ ⭐ ⭐ ⭐",
-            review:
-              "Kami memulai perjalanan kami di MARKAS dan tidak pernah menyesalinya. Tempat yang penuh dengan sumber daya dan inspirasi.",
-          },
-          {
-            name: "David Nasrulloh",
-            avatar: REVIEW_AVATAR_2,
-            job: "Elux Space - Malang, Jawa Timur",
-            rating: "⭐ ⭐ ⭐ ⭐ ⭐",
-            review:
-              "Ruang pertemuan MARKAS membantu kami untuk menggelar pertemuan dengan investor dengan mudah.",
-          },
-        ].map((data, index) => {
+        {currentItems.map((data, index) => {
           return (
             <div key={index}>
               <div className="flex gap-9">
@@ -52,6 +74,7 @@ const ReviewSection = () => {
                     <Image
                       src={data.avatar}
                       width={112}
+                      height={112}
                       alt="Picture of the reviewer"
                     />
                   </div>

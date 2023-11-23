@@ -8,6 +8,7 @@ import KarateristikSection from "@/components/Section/Karateristik";
 import ReviewSection from "@/components/Section/Review";
 import CircleArrowIcon from "@/images/svg/circleArrow";
 import PartnerSection from "@/components/Section/Partner";
+import { EventList } from "@/assets/eventList";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -26,6 +27,8 @@ import BANNER_9 from "@/images/png/banner/banner-9.png";
 import BANNER_10 from "@/images/png/banner/banner-10.png";
 import BANNER_11 from "@/images/png/banner/banner-11.png";
 import BANNER_12 from "@/images/png/banner/banner-12.png";
+import REVIEW_AVATAR_1 from "@/images/png/review-avatar-1.png";
+import REVIEW_AVATAR_2 from "@/images/png/review-avatar-2.png";
 
 const bannerList = [
   BANNER_1,
@@ -41,7 +44,38 @@ const bannerList = [
   BANNER_11,
   BANNER_12,
 ];
-import { EventList } from "@/assets/eventList";
+const reviewList = [
+  {
+    name: "Lexi Handi Nayana",
+    avatar: REVIEW_AVATAR_1,
+    job: "BuddyP2P - Hamburg, Jerman",
+    rating: "⭐ ⭐ ⭐ ⭐ ⭐",
+    review:
+      "Kami memulai perjalanan kami di MARKAS dan tidak pernah menyesalinya. Tempat yang penuh dengan sumber daya dan inspirasi.",
+  },
+  {
+    name: "David Nasrulloh",
+    avatar: REVIEW_AVATAR_2,
+    job: "Elux Space - Malang, Jawa Timur",
+    rating: "⭐ ⭐ ⭐ ⭐ ⭐",
+    review:
+      "Ruang pertemuan MARKAS membantu kami untuk menggelar pertemuan dengan investor dengan mudah.",
+  },
+  {
+    name: "Michael Page",
+    avatar: REVIEW_AVATAR_1,
+    job: "Startup - London, Inggris",
+    rating: "⭐ ⭐ ⭐ ⭐ ⭐",
+    review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+  {
+    name: "Adi Suryanto",
+    avatar: REVIEW_AVATAR_2,
+    job: "Seko Space - Bandung, Jawa Barat",
+    rating: "⭐ ⭐ ⭐ ⭐ ⭐",
+    review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+];
 
 export default function Home() {
   return (
@@ -119,7 +153,7 @@ export default function Home() {
         <KarateristikSection />
       </div>
 
-      <ReviewSection />
+      <ReviewSection review={reviewList} reviewPerPage={2} />
 
       <FAQSection />
 
