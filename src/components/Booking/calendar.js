@@ -45,23 +45,26 @@ const CalendarBooking = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState();
-  const calendarObject = calendar().of(parseInt(selectedYear), selectedMonth);
+  const calendarObject = calendar().of(
+    parseInt(selectedYear),
+    parseInt(selectedMonth)
+  );
 
   const addMonth = () => {
     if (selectedMonth === 11) {
       setSelectedYear((prev) => setSelectedYear(prev + 1));
       setSelectedMonth(0);
-      return;
+    } else {
+      setSelectedMonth((prev) => prev + 1);
     }
-    setSelectedMonth((prev) => prev + 1);
   };
   const decMonth = () => {
-    if (selectedMonth === 0) {
+    if (selectedMonth === 0 || selectedMonth == 0) {
       setSelectedYear((prev) => setSelectedYear(prev - 1));
       setSelectedMonth(11);
-      return;
+    } else {
+      setSelectedMonth((prev) => prev - 1);
     }
-    setSelectedMonth((prev) => prev - 1);
   };
 
   const [events, setEvents] = useState([]);
@@ -111,7 +114,7 @@ const CalendarBooking = () => {
           viewBox="0 0 14 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="my-auto"
+          className="my-auto cursor-pointer "
           onClick={decMonth}
         >
           <path
@@ -130,7 +133,7 @@ const CalendarBooking = () => {
           viewBox="0 0 14 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="my-auto"
+          className="my-auto cursor-pointer"
           onClick={addMonth}
         >
           <path
