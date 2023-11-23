@@ -70,13 +70,8 @@ const ReviewSection = ({ review, reviewPerPage }) => {
             <div key={index}>
               <div className="flex gap-9">
                 <div className="avatar">
-                  <div className="rounded-full">
-                    <Image
-                      src={data.avatar}
-                      width={112}
-                      height={112}
-                      alt="Picture of the reviewer"
-                    />
+                  <div className="w-28 rounded-full">
+                    <Image src={data.avatar} alt="Picture of the reviewer" />
                   </div>
                 </div>
                 <div className="my-auto">
