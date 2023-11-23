@@ -29,15 +29,25 @@ const About = () => {
           </div>
         </div>
       </div>
-      <div
+
+      <div className="text-center mt-[70px]">
+        <div className="text-primary text-[28px]">Filosofi</div>
+        <div className="font-bold text-5xl mt-5">INLKUSIF dan KOLABORATIF</div>
+        <div className="text-[20px] font-light mt-[35px]">
+          Sejak diinisiasi di tahun 2016, semangat #1000StartupDigital adalah
+          untuk berkolaborasi <br /> membuat ekosistem startup Indonesia menjadi
+          inklusif dan kolaboratif.
+        </div>
+      </div>
+
+      <div></div>
+      {/* <div
         className="hero bg-white my-20 max-w-7xl
       "
       >
         <Caraosel
           slides={[
-            <div
-              className="h-60 flex flex-row gap-x-10"
-            >
+            <div className="h-60 flex flex-row gap-x-10">
               <div className="custom-card">
                 <div className="custom-card-header font-bold">
                   👩‍💼👨‍💼
@@ -87,9 +97,7 @@ const About = () => {
                 </div>
               </div>
             </div>,
-            <div
-              className="h-60 flex flex-row gap-x-10"
-            >
+            <div className="h-60 flex flex-row gap-x-10">
               <div className="custom-card">
                 <div className="custom-card-header font-bold">
                   👩‍💼👨‍💼
@@ -141,7 +149,7 @@ const About = () => {
             </div>,
           ]}
         />
-      </div>
+      </div> */}
       <div className="hero min-h-screen bg-white my-20">
         <KarateristikSection />
       </div>
@@ -149,10 +157,10 @@ const About = () => {
         <KolaborasiSection />
       </div>
       <PartnerSection />
-      <div className="hero bg-white">
+      <div className="hero min-h-[screen] bg-white text-[36px] ">
         Gain Knowledge. Get Mentored. Expand Network.
       </div>
-      <div className="hero min-h-[500px] bg-white" />
+      <div className="hero min-h-[400px] bg-white" />
     </>
   );
 };
