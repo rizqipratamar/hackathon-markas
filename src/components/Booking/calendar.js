@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
 import calendar from "calendar-js";
 import { useSearchParams } from "next/navigation";
-import { gapi } from "gapi-script";
+// import { gapi } from "gapi-script";
 import dayjs from "dayjs";
 
 const MAP_DATA = [
@@ -66,31 +66,31 @@ const CalendarBooking = () => {
     "7a50fbffa5e40e9517ab0a7b945f11d3da2013b18049e9b75b7337917d342a93@group.calendar.google.com";
   const apiKey = "AIzaSyCHTwu_NNx0c-p8MTWY8MdqyC1hlsL4YC4";
 
-  const getEvents = (calendarID, apiKey) => {
-    function initiate() {
-      gapi.client
-        .init({
-          apiKey: apiKey,
-        })
-        .then(function () {
-          return gapi.client.request({
-            path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
-          });
-        })
-        .then(
-          (response) => {
-            let events = response.result.items;
-            setEvents(events);
-          },
-          function (err) {
-            return [false, err];
-          }
-        );
-    }
-    gapi.load("client", initiate);
-  };
-
   useEffect(() => {
+    const getEvents = (calendarID, apiKey) => {
+      function initiate() {
+        gapi.client
+          .init({
+            apiKey: apiKey,
+          })
+          .then(function () {
+            return gapi.client.request({
+              path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
+            });
+          })
+          .then(
+            (response) => {
+              let events = response.result.items;
+              setEvents(events);
+            },
+            function (err) {
+              return [false, err];
+            }
+          );
+      }
+
+      gapi.load("client", initiate);
+    };
     const events = getEvents(calendarId, apiKey);
     setEvents(events);
   }, []);
