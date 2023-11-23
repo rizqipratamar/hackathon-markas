@@ -1,8 +1,11 @@
-import FilosofiCard from "@/components/Card/Filosofi";
 import KarateristikSection from "@/components/Section/Karateristik";
 import PartnerSection from "@/components/Section/Partner";
 import KolaborasiSection from "@/components/Section/Kolaborasi";
 import Caraosel from "@/components/Carousel";
+import Image from "next/image";
+import FILOSOFI_IMAGE1 from "@/images/png/filosofi-image-1.png";
+import FILOSOFI_IMAGE2 from "@/images/png/filosofi-image-2.png";
+import FILOSOFI_IMAGE3 from "@/images/png/filosofi-image-3.png";
 
 const About = () => {
   return (
@@ -29,7 +32,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
       <div className="text-center mt-[70px]">
         <div className="text-primary text-[28px]">Filosofi</div>
         <div className="font-bold text-5xl mt-5">INLKUSIF dan KOLABORATIF</div>
@@ -39,8 +41,65 @@ const About = () => {
           inklusif dan kolaboratif.
         </div>
       </div>
+      <div className="mt-20 grid grid-cols-2 w-full px-56 gap-y-10 justify-between">
+        <Image
+          src={FILOSOFI_IMAGE1}
+          width={402}
+          height={275}
+          alt="Picture of the author"
+        />
 
-      <div></div>
+        <div>
+          <div className="text-primary font-light text-xl mt-6">
+            Gain Knowledge
+          </div>
+          <div className="text-[28px] font-semibold mt-2">Ruang Belajar</div>
+          <div className="mt-4 font-light text-[20px]">
+            MARKAS sangat mengedepankan kegunaan ruang untuk menunjang aktivitas
+            penggunanya.
+          </div>
+        </div>
+
+        <div>
+          <div className="text-primary font-light text-xl mt-6">
+            Get Mentored
+          </div>
+          <div className="text-[28px] font-semibold mt-2">
+            Tempat Berkonsultasi
+          </div>
+          <div className="mt-4 font-light text-[20px]">
+            Fasilitas pertemuan singkat maupun diskusi panjang untuk mengolah
+            ide menjadi nyata.
+          </div>
+        </div>
+
+        <Image
+          src={FILOSOFI_IMAGE2}
+          width={402}
+          height={275}
+          alt="Picture of the author"
+        />
+
+        <Image
+          src={FILOSOFI_IMAGE3}
+          width={402}
+          height={275}
+          alt="Picture of the author"
+        />
+
+        <div>
+          <div className="text-primary font-light text-xl mt-6">
+            Expand Network
+          </div>
+          <div className="text-[28px] font-semibold mt-2">
+            Wadah Berkolaborasi
+          </div>
+          <div className="mt-4 font-light text-[20px]">
+            Area kerja bersama yang dapat diakses para startup founder dan
+            stakeholder startup.
+          </div>
+        </div>
+      </div>
       {/* <div
         className="hero bg-white my-20 max-w-7xl
       "
@@ -157,10 +216,10 @@ const About = () => {
         <KolaborasiSection />
       </div>
       <PartnerSection />
-      <div className="hero min-h-[screen] bg-white text-[36px] ">
+      <div className="hero min-h-[screen] mt-60 bg-white text-[36px] ">
         Gain Knowledge. Get Mentored. Expand Network.
       </div>
-      <div className="hero min-h-[400px] bg-white" />
+      <div className="hero min-h-[500px] bg-white" />
     </>
   );
 };
