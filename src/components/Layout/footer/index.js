@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import LOGO from "@/images/png/logo/markas-icon.png";
 
 const Footer = () => {
