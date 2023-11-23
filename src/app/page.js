@@ -13,6 +13,7 @@ import ILLUSTRATION_IMAGE from "@/images/png/illustration-1.png";
 import LOGO from "@/images/png/logo/markas-icon.png";
 import LOGO_TEXT from "@/images/png/logo/markas-text-red.png";
 import Link from "next/link";
+import { EventList } from "@/assets/eventList";
 
 export default function Home() {
   return (
@@ -51,7 +52,7 @@ export default function Home() {
         </div>
 
         <div className="mt-[60px] grid grid-cols-3 gap-12">
-          {[1, 2, 3, 4, 5, 6].map((data, index) => (
+          {EventList.map((data, index) => (
             <div key={index}>
               <EventCard data={data} />
             </div>
