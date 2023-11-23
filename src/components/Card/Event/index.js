@@ -1,5 +1,4 @@
 import Image from "next/image";
-import EVENT_CARD_IMAGE from "@/images/png/event-card-image.png";
 import dayjs from "dayjs";
 
 const EventCard = (props) => {

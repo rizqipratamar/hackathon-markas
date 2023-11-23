@@ -72,8 +72,6 @@ const Events = () => {
 
     const start = dayjs(startDate).subtract(1, "day");
     const end = dayjs(endDate).add(1, "day");
-    console.log(start);
-    console.log(end);
     const filteredList = listEvent.filter((item) => {
       const itemDate = dayjs(item.date);
       return itemDate.isAfter(start) && itemDate.isBefore(end);
@@ -110,9 +108,10 @@ const Events = () => {
               id="search-event-input"
               type="text"
               placeholder="Cari event yang ada di MARKAS Surabaya"
-              className="input input-bordered rounded-full shadow-md my-[60px] w-full"
+              className="input input-bordered rounded-full shadow-md my-[60px] w-full  p-[26px]"
               onChange={searchEvent}
             />
+
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <label
                 className="hover:cursor-pointer"
@@ -155,11 +154,13 @@ const Events = () => {
           </div>
         </div>
 
-        <div role="tablist" className="tabs tabs-boxed">
+        <div role="tablist" className="tabs tabs-boxed h-[70px] my-auto px-4">
           {listTab.map((data, index) => (
             <a
               role="tab"
-              className={`tab ${index === tabIndex && "tab-active"}`}
+              className={`tab  text-[28px] my-auto h-[55px] ${
+                index === tabIndex && "tab-active"
+              }`}
               key={index}
               onClick={() => filterEvent(index)}
             >
@@ -167,7 +168,7 @@ const Events = () => {
             </a>
           ))}
         </div>
-        <div className="mt-[60px] grid grid-cols-3 gap-12">
+        <div className="mt-[60px] grid grid-cols-3 gap-4">
           {listSelectedEvent?.map((data, index) => (
             <div key={index}>
               <EventCard data={data} />
