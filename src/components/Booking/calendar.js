@@ -45,7 +45,10 @@ const CalendarBooking = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedRange, setSelectedRange] = useState();
-  const calendarObject = calendar().of(parseInt(selectedYear), selectedMonth);
+  const calendarObject = calendar().of(
+    parseInt(selectedYear),
+    parseInt(selectedMonth)
+  );
 
   const addMonth = () => {
     if (selectedMonth === 11) {
