@@ -2,15 +2,17 @@ import CircleArrowIcon from "@/images/svg/circleArrow";
 import Image from "next/image";
 import REVIEW_AVATAR_1 from "@/images/png/review-avatar-1.png";
 import REVIEW_AVATAR_2 from "@/images/png/review-avatar-2.png";
+
 const bgImage = {
-  backgroundImage: 'url("../../../images/png/bg-img.png")',
-  backgroundSize: "contain",
+  backgroundImage: "url('/bg-review.png')",
   backgroundRepeat: "no-repeat",
-  color: "white",
+  backgroundPosition: "center",
+  backgroundColor: "white",
+  backgroundSize: "cover",
 };
 const ReviewSection = () => {
   return (
-    <div className="w-screen p-[108px] bg-primary text-white" style={bgImage}>
+    <div className="w-screen h-[925px] p-[108px] text-white" style={bgImage}>
       <div className="flex justify-between">
         <div>
           <div className="font-extrabold text-5xl">APA KATA MEREKA</div>
@@ -46,12 +48,13 @@ const ReviewSection = () => {
             <div key={index}>
               <div className="flex gap-9">
                 <div className="avatar">
-                  <Image
-                    src={data.avatar}
-                    width={112}
-                    height={112}
-                    alt="Picture of the reviewer"
-                  />
+                  <div className="rounded-full">
+                    <Image
+                      src={data.avatar}
+                      width={112}
+                      alt="Picture of the reviewer"
+                    />
+                  </div>
                 </div>
                 <div className="my-auto">
                   <div className="text-4xl font-bold my-5">{data.name}</div>

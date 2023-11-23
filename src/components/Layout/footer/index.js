@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import LOGO from "@/images/png/logo/markas-icon.png";
 
 const Footer = () => {
   return (
@@ -127,6 +128,9 @@ const Footer = () => {
               <div className="mb-[30px] text-2xl font-semibold">EVENTS</div>
             </Link>
             <div className="mb-[30px] text-2xl font-semibold">CREDITS</div>
+          </div>
+          <div className="absolute -bottom-16 -right-16 -z-1 opacity-25">
+            <Image src={LOGO} width={320} alt="background icon" />
           </div>
         </div>
       </div>

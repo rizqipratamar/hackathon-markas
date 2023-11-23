@@ -1,5 +1,6 @@
 "use client";
 
+import BannerCarousel from "@/components/Section/Banner";
 import EventCard from "@/components/Card/Event";
 import FilosofiCard from "@/components/Card/Filosofi";
 import FAQSection from "@/components/Section/FAQ";
@@ -9,29 +10,49 @@ import CircleArrowIcon from "@/images/svg/circleArrow";
 import PartnerSection from "@/components/Section/Partner";
 
 import Image from "next/image";
+import Link from "next/link";
 import ILLUSTRATION_IMAGE from "@/images/png/illustration-1.png";
 import LOGO from "@/images/png/logo/markas-icon.png";
 import LOGO_TEXT from "@/images/png/logo/markas-text-red.png";
-import Link from "next/link";
+import BANNER_1 from "@/images/png/banner/banner-1.png";
+import BANNER_2 from "@/images/png/banner/banner-2.png";
+import BANNER_3 from "@/images/png/banner/banner-3.png";
+import BANNER_4 from "@/images/png/banner/banner-4.png";
+import BANNER_5 from "@/images/png/banner/banner-5.png";
+import BANNER_6 from "@/images/png/banner/banner-6.png";
+import BANNER_7 from "@/images/png/banner/banner-7.png";
+import BANNER_8 from "@/images/png/banner/banner-8.png";
+import BANNER_9 from "@/images/png/banner/banner-9.png";
+import BANNER_10 from "@/images/png/banner/banner-10.png";
+import BANNER_11 from "@/images/png/banner/banner-11.png";
+import BANNER_12 from "@/images/png/banner/banner-12.png";
+
+const bannerList = [
+  BANNER_1,
+  BANNER_2,
+  BANNER_3,
+  BANNER_4,
+  BANNER_5,
+  BANNER_6,
+  BANNER_7,
+  BANNER_8,
+  BANNER_9,
+  BANNER_10,
+  BANNER_11,
+  BANNER_12,
+];
 
 export default function Home() {
   return (
     <>
-      <div className="hero min-h-screen bg-black">
-        <div className="hero-content text-center">
-          <div className="">
-            <h1 className="text-5xl font-bold text-white text-[96px]">
-              Markas
-            </h1>
-            <p className="py-6 text-white text-[36px] font-light ">
-              A hub for startup founders to grow with the ecosystem.
-            </p>
-          </div>
-        </div>
+      <div className="min-h-screen bg-black">
+        <BannerCarousel images={bannerList} interval={1000} />
       </div>
 
       <div className="w-screen bg-primary text-white p-10 text-[32px] text-center">
-        GAIN KNOWLEDGE - GET MENTORED - EXPAND NETWORK
+        <marquee scrollamount="20">
+          GAIN KNOWLEDGE - GET MENTORED - EXPAND NETWORK
+        </marquee>
       </div>
 
       <div className="w-screen min-h-screen bg-white p-[108px]">
