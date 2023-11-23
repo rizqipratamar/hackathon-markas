@@ -3,11 +3,6 @@ import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
 import calendar from "calendar-js";
 import { useSearchParams } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const { gapi } = dynamic(() => import("gapi-script"), {
-  ssr: false,
-});
 import dayjs from "dayjs";
 
 const MAP_DATA = [
@@ -38,6 +33,11 @@ const MAP_DATA = [
   },
 ];
 
+async function fetchCalendarData() {
+  const response = await fetch(`/api`);
+  return response;
+}
+
 const CalendarBooking = () => {
   const query = useSearchParams();
   const selectedRoom = query.get("name");
@@ -65,38 +65,20 @@ const CalendarBooking = () => {
   };
 
   const [events, setEvents] = useState([]);
-
-  const calendarId =
-    "7a50fbffa5e40e9517ab0a7b945f11d3da2013b18049e9b75b7337917d342a93@group.calendar.google.com";
-  const apiKey = "AIzaSyCHTwu_NNx0c-p8MTWY8MdqyC1hlsL4YC4";
+  const [loading, setLoading] = useState([]);
 
   useEffect(() => {
-    const getEvents = (calendarID, apiKey) => {
-      function initiate() {
-        gapi.client
-          .init({
-            apiKey: apiKey,
-          })
-          .then(function () {
-            return gapi.client.request({
-              path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
-            });
-          })
-          .then(
-            (response) => {
-              let events = response.result.items;
-              setEvents(events);
-            },
-            function (err) {
-              return [false, err];
-            }
-          );
-      }
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await fetchCalendarData();
 
-      gapi.load("client", initiate);
+      const parsed = await response.json().then((data) => {
+        return data;
+      });
+      setLoading(false);
+      setEvents(parsed?.items);
     };
-    const events = getEvents(calendarId, apiKey);
-    setEvents(events);
+    fetchData();
   }, []);
 
   function filterEventsByTime(events, targetTime) {
@@ -160,75 +142,84 @@ const CalendarBooking = () => {
       </div>
 
       <div className="mt-12 mx-auto  flex justify-center">
-        <table className="table border-2 border-black max-w-[1050px] justify-center">
-          {/* head */}
-          <thead className="mx-auto">
-            <tr className="mx-auto bg-primary text-white text-[24px]">
-              <th className="w-[150px] p-6 border border-black">Minggu</th>
-              <th className="w-[150px] p-6 border border-black">Senin</th>
-              <th className="w-[150px] p-6 border border-black">Selasa</th>
-              <th className="w-[150px] p-6 border border-black">Rabu</th>
-              <th className="w-[150px] p-6 border border-black">Kamis</th>
-              <th className="w-[150px] p-6 border border-black">Jumat</th>
-              <th className="w-[150px] p-6 border border-black">Sabtu</th>
-            </tr>
-          </thead>
-          <tbody>
-            {calendarObject?.calendar.map((tr, index) => {
-              return (
-                <tr key={index} className="">
-                  {tr?.map((td, idx) => {
-                    const numberCount = filterEventsByDate(
-                      events,
-                      dayjs(
-                        `${selectedMonth + 1}-${td}-${selectedYear}`
-                      ).format("YYYY-MM-DD")
-                    )?.length;
-                    return (
-                      <td
-                        key={index + "-" + idx + "xx"}
-                        className="h-[120px] border border-black text-left align-top hover:bg-slate-200 cursor-pointer"
-                      >
-                        {td != 0 && (
-                          <div
-                            onClick={() => {
-                              if (td > 9) {
-                                setSelectedDate(td);
-                              } else {
-                                setSelectedDate(`0${td}`);
-                              }
-                            }}
-                          >
-                            <div>{td} </div>
-                            <svg
-                              width="45"
-                              height="45"
-                              viewBox="0 0 45 45"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className={`mx-auto my-auto ${
-                                numberCount < 5 && "opacity-50"
-                              }`}
+        {loading && (
+          <div className="flex flex-col gap-4 w-full max-w-[1050px] ">
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-32 w-full"></div>
+            <div className="skeleton h-32 w-full"></div>
+          </div>
+        )}
+        {!loading && (
+          <table className="table border-2 border-black max-w-[1050px] justify-center">
+            {/* head */}
+            <thead className="mx-auto">
+              <tr className="mx-auto bg-primary text-white text-[24px]">
+                <th className="w-[150px] p-6 border border-black">Minggu</th>
+                <th className="w-[150px] p-6 border border-black">Senin</th>
+                <th className="w-[150px] p-6 border border-black">Selasa</th>
+                <th className="w-[150px] p-6 border border-black">Rabu</th>
+                <th className="w-[150px] p-6 border border-black">Kamis</th>
+                <th className="w-[150px] p-6 border border-black">Jumat</th>
+                <th className="w-[150px] p-6 border border-black">Sabtu</th>
+              </tr>
+            </thead>
+            <tbody>
+              {calendarObject?.calendar.map((tr, index) => {
+                return (
+                  <tr key={index} className="">
+                    {tr?.map((td, idx) => {
+                      const numberCount = filterEventsByDate(
+                        events,
+                        dayjs(
+                          `${selectedMonth + 1}-${td}-${selectedYear}`
+                        ).format("YYYY-MM-DD")
+                      )?.length;
+                      return (
+                        <td
+                          key={index + "-" + idx + "xx"}
+                          className="h-[120px] border border-black text-left align-top hover:bg-slate-200 cursor-pointer"
+                        >
+                          {td != 0 && (
+                            <div
+                              onClick={() => {
+                                if (td > 9) {
+                                  setSelectedDate(td);
+                                } else {
+                                  setSelectedDate(`0${td}`);
+                                }
+                              }}
                             >
-                              {numberCount && (
-                                <circle
-                                  cx="22.5"
-                                  cy="22.5"
-                                  r="22.5"
-                                  fill="#D90027"
-                                />
-                              )}
-                            </svg>
-                          </div>
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                              <div>{td} </div>
+                              <svg
+                                width="45"
+                                height="45"
+                                viewBox="0 0 45 45"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className={`mx-auto my-auto ${
+                                  numberCount < 5 && "opacity-50"
+                                }`}
+                              >
+                                {numberCount && (
+                                  <circle
+                                    cx="22.5"
+                                    cy="22.5"
+                                    r="22.5"
+                                    fill="#D90027"
+                                  />
+                                )}
+                              </svg>
+                            </div>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {selectedDate && (

@@ -1,10 +1,10 @@
 "use client";
+import { getSessionStorage } from "@/utils/storage";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 const BookingSuccess = () => {
-  const query = useSearchParams();
-  const link = query.get("link");
+  const link = getSessionStorage("link");
+  const htmlLink = getSessionStorage("htmlLink");
   return (
     <div className="w-screen px-[110px] pt-[30px] min-h-screen text-left">
       <div className="w-full text-center justify-center mt-[66px] tfont-semibold gap-10">
@@ -24,8 +24,13 @@ const BookingSuccess = () => {
         </Link>
       </div>
       <div className="mt-20 mx-auto w-full flex justify-center">
+        <a href={htmlLink} target="_blank" className="text-blue-500">
+          Event results
+        </a>
+      </div>
+      <div className="mx-auto w-full flex justify-center">
         <a href={link} target="_blank" className="text-blue-500">
-          See result on google calendar
+          Save to google calendar
         </a>
       </div>
     </div>
