@@ -103,7 +103,7 @@ const Events = () => {
     <>
       <div className="w-screen px-[110px]">
         <div className="text-center mt-[70px]">
-          <div className="text-primary text-[28px]">Event</div>
+          <div className="text-primary text-xl">Event</div>
           <div className="font-bold text-5xl mt-2">IKUTI KEGIATAN DIMARKAS</div>
           <div className="relative w-full">
             <input
@@ -155,11 +155,16 @@ const Events = () => {
           </div>
         </div>
 
-        <div role="tablist" className="tabs tabs-boxed">
+        <div
+          role="tablist"
+          className="tabs tabs-boxed rounded-full bg-white border border-black"
+        >
           {listTab.map((data, index) => (
             <a
               role="tab"
-              className={`tab ${index === tabIndex && "tab-active"}`}
+              className={`rounded-full tab ${
+                index === tabIndex && "tab-active"
+              }`}
               key={index}
               onClick={() => filterEvent(index)}
             >
@@ -176,7 +181,7 @@ const Events = () => {
         </div>
         <div className="mt-[100px] text-center w-full grid grid-1 gap-12">
           <div className="text-5xl text-primary">Mari berkolaborasi</div>
-          <button className="btn btn-lg btn-primary mx-auto text-[28px] rounded-full ">
+          <button className="btn btn-lg btn-primary mx-auto text-xl rounded-full ">
             Booking
           </button>
         </div>
@@ -196,12 +201,12 @@ const Events = () => {
               id="search-event-input-popup"
               type="text"
               placeholder="Cari event yang ada di MARKAS Surabaya"
-              className="input input-bordered rounded-full shadow-md w-full font-light text-[28px] focus:outline-none p-5"
+              className="input input-bordered rounded-full shadow-md w-full font-light text-xl focus:outline-none p-5"
               onChange={searchEvent}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <h1
-                className="text-[28px] cursor-pointer"
+                className="text-xl cursor-pointer"
                 onClick={() => {
                   document.getElementById("search-event-input-popup").value =
                     "";
@@ -213,13 +218,13 @@ const Events = () => {
             </div>
           </div>
           <div className="w-full mt-3">
-            <p className="font-semibold my-2 px-5 text-[28px]">RUANGAN</p>
+            <p className="font-semibold my-2 px-5 text-xl">RUANGAN</p>
             <div className="flex flex-wrap gap-6 px-5">
               {Array.from(new Set(EventList.map((data) => data.room))).map(
                 (room, index) => (
                   <div
                     className={
-                      `rounded-full border-2 py-2 px-5 font-semibold text-[28px] leading-[40px] cursor-pointer` +
+                      `rounded-full border-2 py-2 px-5 font-semibold text-xl leading-[40px] cursor-pointer` +
                       (selectedRoom === room
                         ? " border-primary text-primary"
                         : " border-black text-black")
@@ -232,15 +237,13 @@ const Events = () => {
                 )
               )}
             </div>
-            <p className="font-semibold my-2 px-5 text-[28px]">
-              JENIS KEGIATAN
-            </p>
+            <p className="font-semibold my-2 px-5 text-xl">JENIS KEGIATAN</p>
             <div className="flex flex-wrap gap-6 px-5">
               {Array.from(new Set(EventList.map((data) => data.category))).map(
                 (category, index) => (
                   <div
                     className={
-                      `rounded-full border-2 py-2 px-5 font-semibold text-[28px] leading-[40px] cursor-pointer` +
+                      `rounded-full border-2 py-2 px-5 font-semibold text-xl leading-[40px] cursor-pointer` +
                       (selectedCategory === category
                         ? " border-primary text-primary"
                         : " border-black text-black")
@@ -253,13 +256,11 @@ const Events = () => {
                 )
               )}
             </div>
-            <p className="font-semibold my-2 px-5 text-[28px]">
-              TANGGAL KEGIATAN
-            </p>
+            <p className="font-semibold my-2 px-5 text-xl">TANGGAL KEGIATAN</p>
             <div className="flex gap-5 px-5">
               <input
                 type="date"
-                className="w-1/3 p-2 rounded-full text-[28px] border border-black"
+                className="w-1/3 p-2 rounded-full text-xl border border-black"
                 placeholder="Tanggal Kejadian"
                 id="start_date"
                 name="start_date"
@@ -270,7 +271,7 @@ const Events = () => {
               />
               <input
                 type="date"
-                className="w-1/3 p-2 rounded-full text-[28px] border border-black"
+                className="w-1/3 p-2 rounded-full text-xl border border-black"
                 placeholder="Tanggal Kejadian"
                 id="end_date"
                 name="end_date"
@@ -280,7 +281,7 @@ const Events = () => {
                 }}
               />
             </div>
-            <div className="flex mt-5 text-[28px] font-semibold gap-2 px-5">
+            <div className="flex mt-5 text-xl font-semibold gap-2 px-5">
               <button
                 className="w-1/4 border-black border border-px rounded-full"
                 onClick={() => clearFilter()}
@@ -288,7 +289,7 @@ const Events = () => {
                 Clear Filter
               </button>
               <label
-                className="btn w-1/4 border-black border-px text-white bg-primary rounded-full hover:bg-primary-hover text-[28px]"
+                className="btn w-1/4 border-black border-px text-white bg-primary rounded-full hover:bg-primary-hover text-xl"
                 htmlFor="modal-show-filters"
               >
                 Apply Filter

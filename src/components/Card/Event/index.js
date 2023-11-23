@@ -4,14 +4,17 @@ import dayjs from "dayjs";
 
 const EventCard = (props) => {
   return (
-    <div className="w-[400px]">
-      <Image
-        src={props.data.imagePath}
-        width={400}
-        height={312}
-        alt="Picture of the author"
-      />
-      <div className="text-[22px] text-center flex-1 p-4 bg-white border-[4px] border-t-0 border-black">
+    <div>
+      <div className="w-full aspect-[399/312] relative cursor-pointer">
+        <Image
+          src={props.data.imagePath}
+          fill={true}
+          priority={true}
+          className="object-cover"
+          alt="Picture of the author"
+        />
+      </div>
+      <div className="text-lg text-center flex-1 p-4 bg-white border-[4px] border-t-0 border-black">
         <div>{props.data.name}</div>
       </div>
       <div className="text-center flex justify-between p-4 bg-primary text-white border-[4px] border-t-0 border-black">

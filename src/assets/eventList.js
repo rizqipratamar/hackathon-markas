@@ -8,7 +8,7 @@ export const EventList = [
     date: "2023-11-22",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 40 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HIPSTER EPS. 40 - DATA ENGINEER",
     room: "Linggarjati",
     category: "Kompetisi",
     imagePath: "/posters/event-card-image-2.png",
@@ -16,7 +16,7 @@ export const EventList = [
     date: "2023-11-22",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 41 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HACKER EPS. 41 - UI/UX DESIGNER",
     room: "Renville",
     category: "Kelas",
     imagePath: "/posters/event-card-image-3.png",
@@ -24,7 +24,7 @@ export const EventList = [
     date: "2023-11-23",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 42 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HIPSTER EPS. 42 - MACHINE LEARNING",
     room: "Roem-Royen",
     category: "Talkshow",
     imagePath: "/posters/event-card-image.png",
@@ -32,7 +32,7 @@ export const EventList = [
     date: "2023-11-23",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 43 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HUSTLER EPS. 43 - MOBILE DEVELOPER",
     room: "Soekarno",
     category: "Workshop",
     imagePath: "/posters/event-card-image-2.png",
@@ -40,7 +40,7 @@ export const EventList = [
     date: "2023-11-24",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 44 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HACKER EPS. 44 - VERSION CONTROL SYSTEM",
     room: "Kartini",
     category: "Kelas",
     imagePath: "/posters/event-card-image-3.png",
@@ -48,7 +48,7 @@ export const EventList = [
     date: "2023-11-24",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 45 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HUSTLER EPS. 45 - BACKEND FRAMEWORK",
     room: "Soepratman",
     category: "Meeting",
     imagePath: "/posters/event-card-image.png",
@@ -56,7 +56,7 @@ export const EventList = [
     date: "2023-12-05",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 46 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HIPSTER EPS. 46 - FRONTEND FRAMEWORK",
     room: "Tjokro Hall",
     category: "Kompetisi",
     imagePath: "/posters/event-card-image-2.png",
@@ -64,7 +64,7 @@ export const EventList = [
     date: "2023-12-05",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 47 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HACKER EPS. 47 - PROJECT MANAGEMENT",
     room: "Linggarjati",
     category: "Workshop",
     imagePath: "/posters/event-card-image-3.png",
@@ -72,7 +72,7 @@ export const EventList = [
     date: "2023-12-06",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 48 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HUSTLER EPS. 48 - TECHNICAL WRITING",
     room: "Renville",
     category: "Kelas",
     imagePath: "/posters/event-card-image.png",
@@ -80,7 +80,7 @@ export const EventList = [
     date: "2023-12-06",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 49 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HIPSTER EPS. 49 - CLOUD COMPUTING",
     room: "Tjokro Hall",
     category: "Talkshow",
     imagePath: "/posters/event-card-image-2.png",
@@ -88,7 +88,7 @@ export const EventList = [
     date: "2023-12-07",
   },
   {
-    name: "SEKOLAH BETA HUSTLER EPS. 50 - SCRUM FRAMEWORK",
+    name: "SEKOLAH BETA HACKER EPS. 50 - CI/CD",
     room: "Linggarjati",
     category: "Kompetisi",
     imagePath: "/posters/event-card-image-3.png",
