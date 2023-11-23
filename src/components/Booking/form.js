@@ -1,4 +1,5 @@
 "use client";
+import { setSessionStorage } from "@/utils/storage";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -33,8 +34,9 @@ const FormBooking = () => {
     });
 
     setLoading(false);
+    setSessionStorage("link", parsed?.link);
     router.push(
-      `/booking?name=${selectedRoom}&date=${selectedDate}&success=true&link=${parsed?.link}`
+      `/booking?name=${selectedRoom}&date=${selectedDate}&success=true`
     );
   };
 

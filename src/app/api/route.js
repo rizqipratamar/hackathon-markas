@@ -24,6 +24,8 @@ export async function POST(request) {
     const response = await calendar.events.insert({
       auth: auth,
       calendarId: calendarId,
+      anyoneCanAddSelf: true,
+      guestsCanInviteOthers: true,
       resource: {
         summary: res.name,
         location:
@@ -41,10 +43,31 @@ export async function POST(request) {
           timeZone: "Asia/Jakarta",
         },
       },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: "email", minutes: 24 * 60 },
+          { method: "popup", minutes: 10 },
+        ],
+      },
     });
 
     if (response["status"] == 200 && response["statusText"] === "OK") {
-      return NextResponse.json({ link: response?.data?.htmlLink });
+      // Function to get the value of a specific parameter from a URL
+      function getParameterValue(url, parameterName) {
+        var queryString = url.split("?")[1];
+        if (queryString) {
+          var params = new URLSearchParams(queryString);
+          return params.get(parameterName);
+        }
+        return null;
+      }
+
+      // Get the value of the 'eid' parameter from the URL
+      var eidValue = getParameterValue(response?.data?.htmlLink, "eid");
+      return NextResponse.json({
+        link: `https://calendar.google.com/event?action=TEMPLATE&tmeid=${eidValue}&tmsrc=${calendarId}`,
+      });
     }
   } catch (error) {
     console.log(`Error at insertEvent --> ${error}`);
