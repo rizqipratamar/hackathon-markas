@@ -1,7 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
+  const scrolltoHash = function (element_id) {
+    const element = document.getElementById(element_id);
+    element?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  };
   return (
     <div className="bg-primary h-[502px] w-full px-[81px] pb-20 z-50">
       <div className="relative z-50 bg-white w-full p-[50px] rounded-lg border-black border-2 h-[440px] mt-[-180px]">
@@ -102,10 +109,19 @@ const Footer = () => {
             <div className="mb-[30px] text-[22px] font-light text-primary">
               REGIONAL
             </div>
-            <div className="mb-[30px] text-2xl font-semibold">SURABAYA</div>
-            <div className="mb-[30px] text-2xl font-semibold">JAKARTA</div>
-            <div className="mb-[30px] text-2xl font-semibold">BANDUNG</div>
-            <div className="mb-[30px] text-2xl font-semibold">DENPASAR</div>
+
+            <Link href="/booking?tab=0">
+              <div className="mb-[30px] text-2xl font-semibold">SURABAYA</div>
+            </Link>
+            <Link href="/booking?tab=1">
+              <div className="mb-[30px] text-2xl font-semibold">JAKARTA</div>
+            </Link>
+            <Link href="/booking?tab=2">
+              <div className="mb-[30px] text-2xl font-semibold">BANDUNG</div>
+            </Link>
+            <Link href="/booking?tab=3">
+              <div className="mb-[30px] text-2xl font-semibold">DENPASAR</div>
+            </Link>
           </div>
           <div className="">
             <div className="mb-[30px] text-[22px] font-light text-primary">
@@ -114,13 +130,21 @@ const Footer = () => {
             <Link href="/booking">
               <div className=" mb-[30px] text-2xl font-semibold">BOOKING</div>
             </Link>
-            <div className="mb-[30px] text-2xl font-semibold">FAQ</div>
+            <Link
+              href="/#faq-section"
+              onClick={() => scrolltoHash("faq-section")}
+            >
+              <div className="mb-[30px] text-2xl font-semibold">FAQ</div>
+            </Link>
           </div>
           <div className="">
             <div className="mb-[30px] text-[22px] font-light text-primary">
               ABOUT
             </div>
-            <Link href="/about">
+            <Link
+              href="/#philosophy"
+              onClick={() => scrolltoHash("philosophy")}
+            >
               <div className="mb-[30px] text-2xl font-semibold">PHILOSOPHY</div>
             </Link>
             <Link href="/events">

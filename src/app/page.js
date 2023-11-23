@@ -59,7 +59,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="mt-[108px] text-center">
+        <div id="philosophy" className="mt-[108px] text-center">
           <div className="text-primary text-[28px] font-semibold">FILOSOFI</div>
           <div className="text-5xl mt-5 font-extrabold">
             INKLUSIF DAN KOLABORATIF

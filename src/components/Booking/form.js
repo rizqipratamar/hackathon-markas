@@ -40,6 +40,7 @@ const FormBooking = () => {
 
     setLoading(false);
     setSessionStorage("link", parsed?.link);
+    setSessionStorage("htmlLink", parsed?.htmlLink);
     router.push(
       `/booking?name=${selectedRoom}&date=${selectedDate}&success=true`
     );

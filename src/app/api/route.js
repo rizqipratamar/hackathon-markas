@@ -66,6 +66,7 @@ export async function POST(request) {
       var eidValue = getParameterValue(response?.data?.htmlLink, "eid");
       return NextResponse.json({
         link: `https://calendar.google.com/event?action=TEMPLATE&tmeid=${eidValue}&tmsrc=${calendarId}`,
+        htmlLink: response?.data?.htmlLink,
       });
     }
   } catch (error) {

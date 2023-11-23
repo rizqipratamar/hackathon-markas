@@ -4,6 +4,7 @@ import Link from "next/link";
 
 const BookingSuccess = () => {
   const link = getSessionStorage("link");
+  const htmlLink = getSessionStorage("htmlLink");
   return (
     <div className="w-screen px-[110px] pt-[30px] min-h-screen text-left">
       <div className="w-full text-center justify-center mt-[66px] tfont-semibold gap-10">
@@ -23,7 +24,7 @@ const BookingSuccess = () => {
         </Link>
       </div>
       <div className="mt-20 mx-auto w-full flex justify-center">
-        <a href={link} target="_blank" className="text-blue-500">
+        <a href={htmlLink} target="_blank" className="text-blue-500">
           Event results
         </a>
       </div>
