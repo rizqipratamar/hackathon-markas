@@ -1,6 +1,5 @@
 import { getCookies } from "./storage";
 
-
 export const baseUrl = "https://jsonplaceholder.typicode.com/";
 
 const HTTP_STATUS_MESSAGE = {
@@ -39,7 +38,7 @@ async function get(url, header) {
     method: "GET",
     headers: {
       ...jsonHeaders,
-      ...authHeader(url,header),
+      ...authHeader(url, header),
     },
   };
 
@@ -96,7 +95,7 @@ async function _delete(url, header) {
 
 // helper functions
 
-function authHeader(_,header) {
+function authHeader(_, header) {
   // return auth header with jwt if user is logged in and request is to the api url
   const token = getCookies("token");
   let customHeader = {};
@@ -114,8 +113,8 @@ function handleResponse(response) {
         const data = text && JSON.parse(text);
         // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
         if (response.status === 401) {
-        //   userService.logoutTokenExpired();
-        //   userService.handleTokenExpired(true);
+          //   userService.logoutTokenExpired();
+          //   userService.handleTokenExpired(true);
         }
         return Promise.reject(data);
       });

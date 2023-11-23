@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="flex-none gap-[82px] text-primary text-[22px] font-light">
         <Link href="/">Home</Link>
         <Link href="/about">About</Link>
-        <div>Philosophy</div>
+        <Link href="/#philosophy">Philosophy</Link>
         <Link href="/events">Events</Link>
         <Link href="/booking">Booking</Link>
         <div>Contact US</div>

@@ -5,9 +5,18 @@ import Image from "next/image";
 import ROOM_1 from "@/images/png/room-1.png";
 import ROOM_2 from "@/images/png/room-2.png";
 import ROOM_3 from "@/images/png/room-3.png";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const BookingMain = () => {
   const { tabIndex, setTabIndex, listTab } = useBooking();
+  const query = useSearchParams();
+  const selectedTab = query.get("tab");
+
+  useEffect(() => {
+    if (selectedTab) setTabIndex(selectedTab);
+  }, [selectedTab, setTabIndex]);
+
   return (
     <>
       <div className="w-screen px-[110px]">
@@ -28,7 +37,7 @@ const BookingMain = () => {
             <a
               role="tab"
               className={`tab ${
-                index === tabIndex && "tab-active"
+                index == tabIndex && "tab-active"
               } text-[28px] my-auto h-[55px] `}
               key={index}
               onClick={() => setTabIndex(index)}

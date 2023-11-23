@@ -41,6 +41,7 @@ const bannerList = [
   BANNER_11,
   BANNER_12,
 ];
+import { EventList } from "@/assets/eventList";
 
 export default function Home() {
   return (
@@ -72,14 +73,14 @@ export default function Home() {
         </div>
 
         <div className="mt-[60px] grid grid-cols-3 gap-12">
-          {[1, 2, 3, 4, 5, 6].map((data, index) => (
+          {EventList.map((data, index) => (
             <div key={index}>
               <EventCard data={data} />
             </div>
           ))}
         </div>
 
-        <div className="mt-[108px] text-center">
+        <div id="philosophy" className="mt-[108px] text-center">
           <div className="text-primary text-[28px] font-semibold">FILOSOFI</div>
           <div className="text-5xl mt-5 font-extrabold">
             INKLUSIF DAN KOLABORATIF

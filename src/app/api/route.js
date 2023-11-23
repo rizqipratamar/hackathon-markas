@@ -2,8 +2,7 @@ import dayjs from "dayjs";
 import { NextResponse } from "next/server";
 const { google } = require("googleapis");
 // Provide the required configuration
-const calendarId =
-  "7a50fbffa5e40e9517ab0a7b945f11d3da2013b18049e9b75b7337917d342a93@group.calendar.google.com";
+const calendarId = process.env.CALENDAR_ID;
 // Google calendar API settings
 const SCOPES = [
   "https://www.googleapis.com/auth/calendar",
@@ -11,9 +10,9 @@ const SCOPES = [
 ];
 
 const auth = new google.auth.JWT(
-  "test-email@calendar-api-405919.iam.gserviceaccount.com",
+  process.env.MAIL_SECRET,
   null,
-  "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCj4GGQFhuCWIXQ\nOUq7W6aS946FFtnxDFB4R3DflsKphwHEn0udQt2OhEIItZicYRPpiuYQnEt/1NnS\nUV4NpqUm4k0lI1qVq8RNt76H4gW03+y+WsIG2oeEfotipJkDBOJf1xl2DZ6pocxm\nsrmwf5cC9MPXu74oa3gUSQlOHF4g+K7O7kAq6M485/Emeah5K2o5/4DHtWVsgRG1\nOsqgh/ZmrLj+HnRBBhpDe+2cLyOI9n6q4OScd63TANejbOGlF067rMbLJaZm30pX\nUZ5iEMMNYOOzwArUeaOuja9dUj1/bAcW5mefag222Ogupit6Jsl7k3lqrWo0oWJO\nYviTf8KlAgMBAAECggEAAfhafpTZA5hC2cwb3OSLg1dAHijSubYlaRIazWVV0f9E\nEWXaMogjJffOovsOlTAJlnf2PamMQQm6KYyTUatcb16uq9uEZSnNJgbueyFHuA+D\nVTi94YYZ7lAt0Xj/G7RLcGpqmA5narA2uMI9hl2SURWPHaD0vbxTPj3a/HMU24G1\nziiBOKt4UNq5qBOCgNjsCEP6lDALcI6NueJkqske3F39qrZgjyOVxL67COtoqtrD\nEn6xLQsD+xwzyqZvm5W4JufWN58WkZ3vW1WUFVxGg6xNxW8dhWZd5tpTUcXn4gq5\nX4MRE9czJr589MbvBW8E9vr7YcOJ/Gt6eXdl4O+ixQKBgQDgoSH1h13JIRIkb9ZI\newQ8KGTPCUulBTh6avAaA54FEzitNZSB95B+pbis13iYr/p6r6leg3EB9KJgadE7\ne1zwAvgdJC3DCOKkHwsoKAW6DrvL4MRu5n/x9CGCXo58QZJ0RpO19m29yG+hMZmY\nbvoOor0ZWqdC5kpDCeY72e63TwKBgQC6wztvVYS07cqomohmH1ZL1AKuzTFfdFGP\nh8VdvJJ5Tv0dWmnDcHBd9HZRmOvkHV3gQ9vSuGQGDAPF50HjPbHKf/T0663/XrCN\n+uL5HeAKx8rtmQDuQWhbhGmFO5iCCzfPPoIVw+ZdYScOHRuDlLXljk3KpXnxKo6A\nQXXEBGtpywKBgQCsu7u9buazr3agBlAlVFOhXv6GJoPA1g7kNC+GEZoGFQ3URAt7\nFcBLY2xrnRXjdA+NIF+BilnwQwpKUZTPxMFm3yGkZxm5jK+bvTN7Iauls4a99I2Z\nKi7hA/Zwpf2zl0jjmRIlLuactfEBZ37RNSWc84+uW4ObcjNQ8d/VznQ/CQKBgC+1\nzCsm553o2Uq1H38nJj58zKqnFKPT7ToDbzIBCFIhEZw8CqS4xpvZ5Zf2vtwpfF/c\nNf3gyPyaeSRHbZeFnTOj+InQ40RHhkbe/rixHxjh7T9BRPGYl/Y5H1O/47fk8b7p\nswWoY+Ma/IUofmzgwo8ACXNpTnuDaZ/uGQ2YK3B9AoGBAIpWfUOMyQ7Yzm9nSt6n\niHINwNoUbPOpUEBr78EJ9WYeCPenkNx8RJo5AyzXqMS3j7KeNog1/rglhA4UVozX\nDi/78pWeP7B71JmRcx7tMQ54+q8zX5xAysjSjiXW/z3Gb2DSxmL2JNJN3/t2w3hl\nJf0Irt+cy06Lm8qbueLHyBPs\n-----END PRIVATE KEY-----\n",
+  process.env.SERVICE_SECRET.split(String.raw`\n`).join("\n"),
   SCOPES
 );
 
@@ -24,11 +23,13 @@ export async function POST(request) {
     const response = await calendar.events.insert({
       auth: auth,
       calendarId: calendarId,
+      anyoneCanAddSelf: true,
+      guestsCanInviteOthers: true,
       resource: {
         summary: res.name,
         location:
           "MARKAS,  Jl. Sidosermo II No.106f, Sidosermo, Kec. Wonocolo, Surabaya, Jawa Timur 60239",
-        description: "Booking Ruangan di Markas",
+        description: res.type + "-" + res.desc || "Booking Ruangan di Markas",
         visibility: "public",
         start: {
           dateTime: res.date,
@@ -41,10 +42,32 @@ export async function POST(request) {
           timeZone: "Asia/Jakarta",
         },
       },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: "email", minutes: 24 * 60 },
+          { method: "popup", minutes: 10 },
+        ],
+      },
     });
 
     if (response["status"] == 200 && response["statusText"] === "OK") {
-      return NextResponse.json({ link: response?.data?.htmlLink });
+      // Function to get the value of a specific parameter from a URL
+      function getParameterValue(url, parameterName) {
+        var queryString = url.split("?")[1];
+        if (queryString) {
+          var params = new URLSearchParams(queryString);
+          return params.get(parameterName);
+        }
+        return null;
+      }
+
+      // Get the value of the 'eid' parameter from the URL
+      var eidValue = getParameterValue(response?.data?.htmlLink, "eid");
+      return NextResponse.json({
+        link: `https://calendar.google.com/event?action=TEMPLATE&tmeid=${eidValue}&tmsrc=${calendarId}`,
+        htmlLink: response?.data?.htmlLink,
+      });
     }
   } catch (error) {
     console.log(`Error at insertEvent --> ${error}`);

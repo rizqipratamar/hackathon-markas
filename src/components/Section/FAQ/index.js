@@ -27,7 +27,7 @@ const FAQSection = () => {
   const [checkedIndex, setCheckedIndex] = useState(0);
   const [faqList, setFaqList] = useState(faq);
   return (
-    <div className="min-h-screen bg-white mt-[182px]">
+    <div id="faq-section" className="min-h-screen bg-white mt-[182px]">
       <div className="text-[28px] text-center font-semibold text-primary mb-[19px]">
         FAQ
       </div>
