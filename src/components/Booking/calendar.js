@@ -1,14 +1,46 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import calendar from "calendar-js";
 import { useSearchParams } from "next/navigation";
+import { gapi } from "gapi-script";
+import dayjs from "dayjs";
+
+const MAP_DATA = [
+  {
+    rangeText: "12.00 - 14.00",
+    startTime: "T12:00:00",
+    endTime: "T14:00:00",
+  },
+  {
+    rangeText: "14.00 - 16.00",
+    startTime: "T14:00:00",
+    endTime: "T16:00:00",
+  },
+  {
+    rangeText: "16.00 - 18.00",
+    startTime: "T16:00:00",
+    endTime: "T18:00:00",
+  },
+  {
+    rangeText: "18.00 - 20.00",
+    startTime: "T18:00:00",
+    endTime: "T20:00:00",
+  },
+  {
+    rangeText: "20.00 - 22.00",
+    startTime: "T20:00:00",
+    endTime: "T23:00:00",
+  },
+];
 
 const CalendarBooking = () => {
   const query = useSearchParams();
   const selectedRoom = query.get("name");
   const [selectedMonth, setSelectedMonth] = useState(10);
   const [selectedYear, setSelectedYear] = useState(2023);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedRange, setSelectedRange] = useState();
   const calendarObject = calendar().of(parseInt(selectedYear), selectedMonth);
 
   const addMonth = () => {
@@ -28,6 +60,62 @@ const CalendarBooking = () => {
     setSelectedMonth((prev) => prev - 1);
   };
 
+  const [events, setEvents] = useState([]);
+
+  const calendarId =
+    "7a50fbffa5e40e9517ab0a7b945f11d3da2013b18049e9b75b7337917d342a93@group.calendar.google.com";
+  const apiKey = "AIzaSyCHTwu_NNx0c-p8MTWY8MdqyC1hlsL4YC4";
+
+  const getEvents = (calendarID, apiKey) => {
+    function initiate() {
+      gapi.client
+        .init({
+          apiKey: apiKey,
+        })
+        .then(function () {
+          return gapi.client.request({
+            path: `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events`,
+          });
+        })
+        .then(
+          (response) => {
+            let events = response.result.items;
+            setEvents(events);
+          },
+          function (err) {
+            return [false, err];
+          }
+        );
+    }
+    gapi.load("client", initiate);
+  };
+
+  useEffect(() => {
+    const events = getEvents(calendarId, apiKey);
+    setEvents(events);
+  }, []);
+
+  function filterEventsByTime(events, targetTime) {
+    return events?.filter((event) => {
+      // Sesuaikan format waktu yang diinginkan dengan format yang ada dalam data
+      const formattedTargetTime =
+        dayjs(`${selectedMonth + 1}-${selectedDate}-${selectedYear}`).format(
+          "YYYY-MM-DD"
+        ) +
+        targetTime +
+        "+07:00"; // Misalnya, '12.00' menjadi '12:00:00+07:00'
+
+      // Bandingkan properti start.dateTime dengan waktu yang ditargetkan
+
+      return event?.start?.dateTime === formattedTargetTime;
+    });
+  }
+
+  function filterEventsByDate(events, targetTime) {
+    return events?.filter((event) => {
+      return dayjs(event?.start?.dateTime).format("YYYY-MM-DD") === targetTime;
+    });
+  }
   return (
     <div className="w-screen px-[110px] pt-[30px] min-h-screen text-left">
       <div className="w-full text-center justify-center flex mt-[66px] text-[32px] font-semibold gap-10">
@@ -47,7 +135,6 @@ const CalendarBooking = () => {
           />
         </svg>
         <div>
-          {" "}
           {calendarObject?.month} {selectedYear}{" "}
         </div>
 
@@ -87,13 +174,27 @@ const CalendarBooking = () => {
               return (
                 <tr key={index} className="">
                   {tr?.map((td, idx) => {
+                    const numberCount = filterEventsByDate(
+                      events,
+                      dayjs(
+                        `${selectedMonth + 1}-${td}-${selectedYear}`
+                      ).format("YYYY-MM-DD")
+                    )?.length;
                     return (
                       <td
-                        key={idx}
+                        key={index + "-" + idx + "xx"}
                         className="h-[120px] border border-black text-left align-top hover:bg-slate-200 cursor-pointer"
                       >
                         {td != 0 && (
-                          <>
+                          <div
+                            onClick={() => {
+                              if (td > 9) {
+                                setSelectedDate(td);
+                              } else {
+                                setSelectedDate(`0${td}`);
+                              }
+                            }}
+                          >
                             <div>{td} </div>
                             <svg
                               width="45"
@@ -101,16 +202,20 @@ const CalendarBooking = () => {
                               viewBox="0 0 45 45"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
-                              className="mx-auto my-auto"
+                              className={`mx-auto my-auto ${
+                                numberCount < 5 && "opacity-50"
+                              }`}
                             >
-                              <circle
-                                cx="22.5"
-                                cy="22.5"
-                                r="22.5"
-                                fill="#D90027"
-                              />
+                              {numberCount && (
+                                <circle
+                                  cx="22.5"
+                                  cy="22.5"
+                                  r="22.5"
+                                  fill="#D90027"
+                                />
+                              )}
                             </svg>
-                          </>
+                          </div>
                         )}
                       </td>
                     );
@@ -121,60 +226,62 @@ const CalendarBooking = () => {
           </tbody>
         </table>
       </div>
-      <div className="w-full max-w-[1050px] mx-auto mt-20 border-2 border-black rounded-xl">
-        <div className="text-[32px] text-white bg-primary p-[14px] rounded-lg">
-          21 November 2023
-        </div>
-        <div className="p-[44px]">
-          <div className="border-2 border-black grid grid-cols-6 rounded-lg">
-            <div className="p-6 col-span-2 text-center border-r-2 border-black">
-              Jam
-            </div>
-            <div className="p-6 col-span-4 text-center  border-black">
-              Kegiatan
-            </div>
-            <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
-              12.00 - 14.00
-            </div>
-            <div className="p-6 col-span-4 text-center  border-t-2 border-black">
-              Kegiatan
-            </div>
-            <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
-              14.00 - 16.00
-            </div>
-            <div className="p-6 col-span-4 text-center  border-t-2 border-black">
-              Kegiatan
-            </div>
-            <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
-              16.00 - 18.00
-            </div>
-            <div className="p-6 col-span-4 text-center  border-t-2 border-black">
-              Kegiatan
-            </div>
-            <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
-              18.00 - 20.00
-            </div>
-            <div className="p-6 col-span-4 text-center  border-t-2 border-black">
-              Kegiatan
-            </div>
-            <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
-              20.00 - 22.00
-            </div>
-            <div className="p-6 col-span-4 text-center  border-t-2 border-black">
-              Kegiatan
-            </div>
-            <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
-              22.00 - 22.30
-            </div>
-            <div className="p-6 col-span-4 text-center  border-t-2 border-black">
-              Kegiatan
+
+      {selectedDate && (
+        <div className="w-full max-w-[1050px] mx-auto mt-20 border-2 border-black rounded-xl">
+          <div className="text-[32px] text-white bg-primary p-[14px] rounded-lg">
+            {selectedDate} {calendarObject?.month} {selectedYear}
+          </div>
+          <div className="p-[44px]">
+            <div className="border-2 border-black grid grid-cols-6 rounded-lg">
+              <div className="p-6 col-span-2 text-center border-r-2 border-black">
+                Jam
+              </div>
+              <div className="p-6 col-span-4 text-center  border-black">
+                Kegiatan
+              </div>
+
+              {MAP_DATA.map((v, idx) => {
+                return (
+                  <Fragment key={idx}>
+                    <div className="p-6 col-span-2 text-center border-r-2 border-t-2 border-black">
+                      {v.rangeText}
+                    </div>
+                    <div
+                      className={`${
+                        selectedRange === v.startTime && "bg-slate-200"
+                      } p-6 col-span-4 text-center  border-t-2 border-black hover:bg-slate-200 cursor-pointer`}
+                      onClick={() => setSelectedRange(v.startTime)}
+                    >
+                      {filterEventsByTime(events, v.startTime)
+                        ?.map((data) => data?.summary)
+                        ?.map((v, i) => (
+                          <div key={idx + i + idx + "xx" + i}>
+                            <span className="text-primary">•</span>
+                            {v}
+                          </div>
+                        ))}
+                    </div>
+                  </Fragment>
+                );
+              })}
             </div>
           </div>
         </div>
-      </div>
+      )}
+
       <div className="mt-16 mx-auto w-full max-w-[1050px] flex justify-end">
-        <Link href={`/booking?name=${selectedRoom}&date='test'`}>
-          <button className="btn btn-lg btn-primary text-[28px] rounded-2xl ">
+        <Link
+          href={`/booking?name=${selectedRoom}&date=${
+            dayjs(
+              `${selectedMonth + 1}-${selectedDate}-${selectedYear}`
+            ).format("YYYY-MM-DD") + selectedRange
+          }`}
+        >
+          <button
+            disabled={!selectedRange}
+            className="btn btn-lg btn-primary text-[28px] rounded-2xl "
+          >
             Pilih Tanggal
           </button>
         </Link>

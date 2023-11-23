@@ -1,6 +1,10 @@
+"use client";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const BookingSuccess = () => {
+  const query = useSearchParams();
+  const link = query.get("link");
   return (
     <div className="w-screen px-[110px] pt-[30px] min-h-screen text-left">
       <div className="w-full text-center justify-center mt-[66px] tfont-semibold gap-10">
@@ -18,6 +22,11 @@ const BookingSuccess = () => {
             Kembali Ke beranda
           </button>
         </Link>
+      </div>
+      <div className="mt-20 mx-auto w-full flex justify-center">
+        <a href={link} target="_blank" className="text-blue-500">
+          See result on google calendar
+        </a>
       </div>
     </div>
   );

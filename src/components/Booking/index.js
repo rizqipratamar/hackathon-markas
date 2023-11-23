@@ -7,7 +7,7 @@ import ROOM_2 from "@/images/png/room-2.png";
 import ROOM_3 from "@/images/png/room-3.png";
 
 const BookingMain = () => {
-  const { roomList, tabIndex, setTabIndex, listTab } = useBooking();
+  const { tabIndex, setTabIndex, listTab } = useBooking();
   return (
     <>
       <div className="w-screen px-[110px]">
