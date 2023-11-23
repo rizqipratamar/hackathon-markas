@@ -19,14 +19,19 @@ const FormBooking = () => {
 
   const router = useRouter();
 
-  const [eventName, setEventName] = useState("null");
+  const [eventName, setEventName] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isMale, setIsMale] = useState(true);
+  const [description, setDescription] = useState(null);
+  const [type, setType] = useState(null);
 
   const handleSubmit = async () => {
     setLoading(true);
     const response = await postEventData({
       name: selectedRoom + " - " + eventName,
       date: selectedDate,
+      type: type,
+      desc: description,
     });
 
     const parsed = await response.json().then((data) => {
@@ -49,8 +54,7 @@ const FormBooking = () => {
           </label>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full mt-2"
+            className="input input-bordered w-full mt-4 rounded-full"
           />
 
           <label className="label mt-8">
@@ -61,13 +65,16 @@ const FormBooking = () => {
               type="radio"
               name="radio-2"
               className="radio radio-primary my-auto"
-              checked
+              checked={isMale}
+              onChange={() => setIsMale(!isMale)}
             />{" "}
             <div>Male</div>
             <input
               type="radio"
               name="radio-2"
+              checked={!isMale}
               className="radio radio-primary my-auto"
+              onChange={() => setIsMale(!isMale)}
             />
             <div>Female</div>
           </div>
@@ -77,8 +84,7 @@ const FormBooking = () => {
           </label>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full mt-2"
+            className="input input-bordered w-full mt-4 rounded-full"
           />
 
           <label className="label mt-6">
@@ -86,8 +92,7 @@ const FormBooking = () => {
           </label>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full mt-2"
+            className="input input-bordered w-full mt-4 rounded-full"
           />
 
           <label className="label mt-6">
@@ -97,17 +102,16 @@ const FormBooking = () => {
           </label>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full mt-2"
+            className="input input-bordered w-full mt-4 rounded-full"
           />
 
           <label className="label mt-6">
-            <span className="label-text text-[28px] ">Jenis Kegiatan</span>
+            <span className="label-text text-[28px]  ">Jenis Kegiatan</span>
           </label>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full mt-2"
+            className="input input-bordered w-full max-w-md mt-4 rounded-full"
+            onChange={(e) => setType(e.target.value)}
           />
 
           <label className="label mt-6">
@@ -115,15 +119,17 @@ const FormBooking = () => {
           </label>
           <input
             type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full mt-2"
+            className="input input-bordered w-full mt-4 rounded-full"
             onChange={(e) => setEventName(e.target.value)}
           />
 
           <label className="label mt-6">
             <span className="label-text text-[28px] ">Deskripsi Singkat</span>
           </label>
-          <textarea className="textarea textarea-bordered" placeholder="Bio" />
+          <textarea
+            className="textarea textarea-bordered mt-4 h-[391px] rounded-xl"
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
       </div>
       <div className="mt-16 mx-auto w-full flex justify-end">
