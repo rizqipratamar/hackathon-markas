@@ -37,6 +37,7 @@ const FormBooking = () => {
       `/booking?name=${selectedRoom}&date=${selectedDate}&success=true&link=${parsed?.link}`
     );
   };
+
   return (
     <div className="w-screen px-[110px] pt-[30px] min-h-screen text-left">
       <div className="w-full text-center justify-center flex mt-[66px] text-[32px] font-semibold gap-10">

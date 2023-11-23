@@ -51,3 +51,19 @@ export async function POST(request) {
     return NextResponse.json({ res: error });
   }
 }
+
+export async function GET() {
+  const calendar = google.calendar({ version: "v3" });
+  try {
+    let response = await calendar.events.list({
+      auth: auth,
+      calendarId: calendarId,
+    });
+
+    let items = response["data"]["items"];
+    return NextResponse.json({ items });
+  } catch (error) {
+    console.log(`Error at getEvents --> ${error}`);
+    return NextResponse.json({ res: error });
+  }
+}
